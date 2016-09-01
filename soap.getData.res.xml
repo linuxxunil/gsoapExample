@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns2="urn:soap">
+ <SOAP-ENV:Body  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <ns2:getDataResponse>
+   <result>
+    <quantity>0</quantity>
+    <dataArray>
+     <data>
+      <dateTime></dateTime>
+      <content></content>
+     </data>
+     <data>
+      <dateTime></dateTime>
+      <content></content>
+     </data>
+    </dataArray>
+    <status>false</status>
+    <message></message>
+    <dateTime></dateTime>
+   </result>
+  </ns2:getDataResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="soap"
+  targetNamespace="http://github.com/linuxxunil"
+ xmlns:tns="http://github.com/linuxxunil"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns2="urn:soap"
+  xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:HTTP="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+  xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+  xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+  <schema targetNamespace="urn:soap"
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns2="urn:soap"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="unqualified"
+    attributeFormDefault="unqualified">
+    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <complexType name="ResponseBase"><!-- ResponseBase -->
+          <sequence>
+            <element name="status" type="xsd:boolean" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::status -->
+            <element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::message -->
+            <element name="dateTime" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::dateTime -->
+          </sequence>
+    </complexType>
+    <complexType name="Data"><!-- Data -->
+          <sequence>
+            <element name="dateTime" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- Data::dateTime -->
+            <element name="content" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- Data::content -->
+          </sequence>
+    </complexType>
+    <complexType name="DataArray"><!-- DataArray -->
+          <sequence>
+            <element name="data" type="ns2:Data" minOccurs="0" maxOccurs="unbounded"/><!-- DataArray::__size -->
+          </sequence>
+    </complexType>
+    <complexType name="DataRep"><!-- DataRep -->
+      <complexContent>
+        <extension base="ResponseBase">
+          <sequence>
+            <element name="quantity" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- DataRep::quantity -->
+            <element name="dataArray" type="ns2:DataArray" minOccurs="1" maxOccurs="1"/><!-- DataRep::dataArray -->
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </schema>
+
+</types>
+
+<message name="getDataRequest">
+  <part name="name" type="xsd:string"/><!-- ns2__getData::name -->
+</message>
+
+<message name="getDataResponse">
+  <part name="result" type="ns2:DataRep"/><!-- ns2__getData::result -->
+</message>
+
+<portType name="soapPortType">
+  <operation name="getData">
+    <documentation>Service definition of function ns2__getData</documentation>
+    <input message="tns:getDataRequest"/>
+    <output message="tns:getDataResponse"/>
+  </operation>
+</portType>
+
+<binding name="soap" type="tns:soapPortType">
+  <SOAP:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getData">
+    <SOAP:operation style="rpc" soapAction=""/>
+    <input>
+          <SOAP:body use="encoded" namespace="urn:soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+          <SOAP:body use="encoded" namespace="urn:soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+  </operation>
+</binding>
+
+<service name="soap">
+  <documentation>gSOAP 2.8.32 generated service definition</documentation>
+  <port name="soap" binding="tns:soap">
+    <SOAP:address location="http://localhost:80"/>
+  </port>
+</service>
+
+</definitions>

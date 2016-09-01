@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <schema targetNamespace="urn:soap"
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns2="urn:soap"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="unqualified"
+    attributeFormDefault="unqualified">
+    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <complexType name="ResponseBase"><!-- ResponseBase -->
+          <sequence>
+            <element name="status" type="xsd:boolean" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::status -->
+            <element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::message -->
+            <element name="dateTime" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- ResponseBase::dateTime -->
+          </sequence>
+    </complexType>
+    <complexType name="Data"><!-- Data -->
+          <sequence>
+            <element name="dateTime" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- Data::dateTime -->
+            <element name="content" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- Data::content -->
+          </sequence>
+    </complexType>
+    <complexType name="DataArray"><!-- DataArray -->
+          <sequence>
+            <element name="data" type="ns2:Data" minOccurs="0" maxOccurs="unbounded"/><!-- DataArray::__size -->
+          </sequence>
+    </complexType>
+    <complexType name="DataRep"><!-- DataRep -->
+      <complexContent>
+        <extension base="ResponseBase">
+          <sequence>
+            <element name="quantity" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- DataRep::quantity -->
+            <element name="dataArray" type="ns2:DataArray" minOccurs="1" maxOccurs="1"/><!-- DataRep::dataArray -->
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </schema>
+
